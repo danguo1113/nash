@@ -22,16 +22,16 @@ def find_nash_equilibrium(playerA_narr, playerB_narr, matrix_dim):
     # For each row, find the greatest elements and look in columns if B has incentive to deviate 
     lst_of_nash_eq = []
     for row in range(matrix_dim):
-        row_in_A = playerA_narr[row]
-        max_payoff_A = max(row_in_A)
-        indices_of_max = np.where(row_in_A == max_payoff_A)[0]
+        row_in_B = playerB_narr[row]
+        max_payoff_B = max(row_in_B)
+        indices_of_max = np.where(row_in_B == max_payoff_B)[0]
         for col in indices_of_max:
-            max_payoff_B = max(playerB_narr[:,col])
-            if playerB_narr[row][col] == max_payoff_B:
+            max_payoff_A = max(playerA_narr[:,col])
+            if playerA_narr[row][col] == max_payoff_A:
                 lst_of_nash_eq.append((row,col))
     return lst_of_nash_eq
     
-def parse_game_file(game_file):
+def parse_game_file(game_file,player_lst):
     f = open(game_file,'r')
     # The assumed file structure is as such:
     # First line: A number N referring to the subsequent N by N payoff matrix
@@ -48,16 +48,22 @@ def parse_game_file(game_file):
     playerA,playerB = split_payoffs(payoff_matrix_rows,matrix_dim)
     playerA_narr = np.array(playerA, np.int32)
     playerB_narr = np.array(playerB, np.int32)
-    print playerA_narr
-    print playerB_narr
+    player_lst.append(playerA_narr)
+    player_lst.append(playerB_narr)
+    return matrix_dim
 
-    lst_of_nash_eq = find_nash_equilibrium(playerA_narr, playerB_narr,matrix_dim)
 
 def main():
     args = sys.argv
     game_file = args[1]
-    a_matrix,b_matrix = parse_game_file(game_file)
+    print game_file
+    player_lst = []
+    matrix_dim= parse_game_file(game_file,player_lst)
+    print player_lst[0]
+    print player_lst[1]
+    lst_of_nash_eq = find_nash_equilibrium(player_lst[0], player_lst[1],matrix_dim)
+    print lst_of_nash_eq
     
 
-if __name__ == 'main':
-    main()
+if __name__ == '__main__':
+    sys.exit(main())
