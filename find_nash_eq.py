@@ -56,11 +56,8 @@ def parse_game_file(game_file,player_lst):
 def main():
     args = sys.argv
     game_file = args[1]
-    print game_file
     player_lst = []
     matrix_dim= parse_game_file(game_file,player_lst)
-    print player_lst[0]
-    print player_lst[1]
     lst_of_nash_eq = find_nash_equilibrium(player_lst[0], player_lst[1],matrix_dim)
     print lst_of_nash_eq
     
