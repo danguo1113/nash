@@ -16,7 +16,7 @@ def split_payoffs(payoff_matrix_rows, matrix_dim):
         playerB.append(playerB_row_formatted)
     return playerA, playerB
 
-def find_nash_equilibrium1(playerA_narr, playerB_narr, matrix_dim):
+def find_nash_equilibrium2(playerA_narr, playerB_narr, matrix_dim):
     # The algorithm is as such
     # playerA_narr strategies are reflected in rows
     # For each row in matrix B, find the greatest payoff for B and look in columns if A has incentive to deviate 
@@ -31,7 +31,7 @@ def find_nash_equilibrium1(playerA_narr, playerB_narr, matrix_dim):
                 lst_of_nash_eq.append((row,col))
     return lst_of_nash_eq
 
-def find_nash_equilibrium(playerA_narr, playerB_narr, matrix_dim):
+def find_nash_equilibrium1(playerA_narr, playerB_narr, matrix_dim):
     # matrix A
     max_in_a = []
     max_in_b = []
@@ -70,7 +70,16 @@ def parse_game_file(game_file,player_lst):
     player_lst.append(playerA_narr)
     player_lst.append(playerB_narr)
     return matrix_dim
-    
+
+
+def find_nash_eq1(player_lst, matrix_dim):
+    lst_of_nash_eq = find_nash_equilibrium1(player_lst[0], player_lst[1],matrix_dim)
+    print 'Algo1: ' + str(lst_of_nash_eq)
+
+def find_nash_eq2(player_lst, matrix_dim):
+    lst_of_nash_eq = find_nash_equilibrium2(player_lst[0], player_lst[1],matrix_dim)
+    print 'Algo2: ' + str(lst_of_nash_eq)
+
 
 def main():
     args = sys.argv
@@ -83,6 +92,7 @@ def main():
     print 'Algo2: ' + str(lst_of_nash_eq)
     return 0
     
+
 
 if __name__ == '__main__':
     sys.exit(main())
