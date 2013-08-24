@@ -74,11 +74,12 @@ def parse_game_file(game_file,player_lst):
 
 def find_nash_eq1(player_lst, matrix_dim):
     lst_of_nash_eq = find_nash_equilibrium1(player_lst[0], player_lst[1],matrix_dim)
-    print 'Algo1: ' + str(lst_of_nash_eq)
+    return lst_of_nash_eq
+
 
 def find_nash_eq2(player_lst, matrix_dim):
     lst_of_nash_eq = find_nash_equilibrium2(player_lst[0], player_lst[1],matrix_dim)
-    print 'Algo2: ' + str(lst_of_nash_eq)
+    return lst_of_nash_eq
 
 
 def main():
